@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valentine 💗</title>
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(
+        180deg,
+        #cfe9ff 0%,
+        #eaf6ff 18%,
+        #ffe1ea 30%,
+        #f9cfe0 50%,
+        #e6c7f0 75%,
+        #dbc2f3 100%
+      );
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* AWAN */
+    .cloud {
+      position: fixed;
+      top: 20px;
+      background: white;
+      border-radius: 50px;
+      opacity: 0.8;
+      filter: blur(0.5px);
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: white;
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      top: -30%;
+    }
+
+    .cloud::after {
+      width: 45%;
+      height: 45%;
+      right: 10%;
+      top: -20%;
+    }
+
+    .cloud.left {
+      width: 140px;
+      height: 50px;
+      left: 20px;
+    }
+
+    .cloud.right {
+      width: 160px;
+      height: 55px;
+      right: 20px;
+      top: 60px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 22px;
+      text-align: center;
+      max-width: 330px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease;
+      position: relative;
+      z-index: 5;
+    }
+
+    h1 { color: #ff4d6d; margin-bottom: 15px; }
+
+    p {
+      color: #444;
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      margin-bottom: 20px;
+      position: relative;
+      height: 60px;
+    }
+
+    button {
+      border: none;
+      border-radius: 30px;
+      padding: 12px 28px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+    }
+
+    .yes-button {
+      background: #ff4d6d;
+      color: white;
+      left: 0;
+    }
+
+    .no-button {
+      background: #eee;
+      color: #333;
+      right: 0;
+    }
+
+    .gif_container img {
+      width: 180px;
+      margin-top: 10px;
+      border-radius: 12px;
+    }
+
+    /* HEART */
+    .heart {
+      position: fixed;
+      color: #ff4d6d;
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: 10;
+      animation: fly 4.5s ease-in forwards;
+    }
+
+    @keyframes fly {
+      0% { transform: translate(0,0) scale(0.6); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translate(var(--x), var(--y)) scale(1.6); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body id="body">
+
+<div class="cloud left"></div>
+<div class="cloud right"></div>
+
+<audio id="bgm" loop>
+  <source src="https://asatoru85-gif.github.io/aku/AkuMilikmu.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="card">
+  <h1>Haiiiii</h1>
+
+  <p>
+    Aku sebenernya udah lama pengen jujur.<br><br>
+    aku suka bangett ngobrol sama kamu,<br>
+    aku ngerasa nyaman gituu 🤍<br><br>
+    Aku ga mau buru-buru kamu kasi jawabannya,<br>
+    aku cuma pengen lebih dekat sama kamu,<br>
+    pelan-pelan tapi serius.<br><br>
+    Will u be my valentine hehe?
+  </p>
+
+  <div class="buttons">
+    <button class="yes-button" onclick="handleYesClick()">IYAA AKU MAU💗</button>
+    <button class="no-button" id="noBtn">COBA TOLAK KALO BISA HEHE 😼</button>
+  </div>
+
+  <div class="gif_container">
+    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif">
+  </div>
+</div>
+
+<script>
+let musicStarted = false;
+const bgm = document.getElementById("bgm");
+
+document.getElementById("body").addEventListener("click", () => {
+  if (!musicStarted) {
+    bgm.volume = 0.5;
+    bgm.play();
+    musicStarted = true;
+  }
+});
+
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseenter", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+function moveButton() {
+  noBtn.style.left = Math.random() * 200 + "px";
+  noBtn.style.top = Math.random() * 40 + "px";
+}
+
+function handleYesClick() {
+  for (let i = 0; i < 120; i++) {
+    setTimeout(createHeart, i * 25);
+  }
+
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        background: linear-gradient(
+          180deg,
+          #cfe9ff 0%,
+          #eaf6ff 25%,
+          #ffe1ea 50%,
+          #f3d6ee 70%,
+          #dbc2f3 100%
+        );
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        color:#ff4d6d;
+        font-family:Arial;
+        animation:fadeIn 1.2s ease;
+      ">
+        <h1>
+          Makasiii yaaaaa 🤍<br><br>
+          Beneran mauu.<br>
+          YEYEYEYEYEYEYEY.<br>
+          Aku seneng bangettt asliiii.<br>
+          Kita jalanin pelan-pelan,
+          tapi serius yaa.
+        </h1>
+      </div>`;
+  }, 1200);
+}
+
+function createHeart() {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤";
+  h.style.fontSize = 14 + Math.random() * 26 + "px";
+
+  const side = Math.floor(Math.random() * 4);
+  let x, y, tx, ty;
+
+  if (side === 0) { x = Math.random()*innerWidth; y = -20; tx="0"; ty="120vh"; }
+  else if (side === 1) { x = Math.random()*innerWidth; y = innerHeight+20; tx="0"; ty="-120vh"; }
+  else if (side === 2) { x = -20; y = Math.random()*innerHeight; tx="120vw"; ty="0"; }
+  else { x = innerWidth+20; y = Math.random()*innerHeight; tx="-120vw"; ty="0"; }
+
+  h.style.left = x+"px";
+  h.style.top = y+"px";
+  h.style.setProperty("--x", tx);
+  h.style.setProperty("--y", ty);
+
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+}
+</script>
+
+</body>
+</html>
